@@ -1,0 +1,26 @@
+ip a add 192.168.5.56/24 dev eth0
+ip r add default via 192.168.5.254
+
+
+echo "samba-common samba-common/workgroup string  WORKGROUP" | debconf-set-selections
+echo "samba-common samba-common/dhcp boolean true" | debconf-set-selections
+echo "samba-common samba-common/do_debconf boolean true" | debconf-set-selections
+
+
+
+mkdir -p /recursos/Departamento1
+mkdir /recursos/Departamento2
+mkdir /recursos/Departamento3
+mkdir /recursos/Departamento4
+
+groupadd recursos
+chown root:recursos /recursos/*
+chmod 770 /recursos/*
+
+
+apt update && apt install -y samba samba-common
+cp /shared/smb.conf /etc/samba/smb.conf
+/etc/init.d/smbd start
+
+useradd -m -G recursos pedropegu 
+echo -ne "unodos\nunodos\n" | smbpasswd -a -s pedropegu

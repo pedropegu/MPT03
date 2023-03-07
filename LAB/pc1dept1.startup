@@ -1,0 +1,17 @@
+dhclient
+export https_proxy=http://192.168.0.254:3128
+export http_proxy=http://192.168.0.254:3128
+
+
+apt update && apt install cifs-utils -y
+
+
+touch /var/.credentials
+echo "username=pedropegu" > /var/.credentials
+echo "password=unodos" > /var/.credentials
+
+chmod 600 /var/.credentials
+
+mkdir /recursos
+echo "//serv1.admin/Departamento1 /recursos cifs credentials=/var/.credentials 0 0" > /etc/fstab
+mount -a

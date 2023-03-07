@@ -1,0 +1,36 @@
+ip link set dev eth0 up
+ip link set dev eth1 up
+ip link set dev eth2 up
+ip link set dev eth3 up
+ip link set dev eth4 up 
+
+ip link add link eth0 name eth0.10 type vlan id 10
+ip link add link eth0 name eth0.20 type vlan id 20
+ip link add link eth0 name eth0.30 type vlan id 30
+ip link add link eth0 name eth0.40 type vlan id 40
+
+ip link set dev eth0.10 up
+ip link set dev eth0.20 up
+ip link set dev eth0.30 up
+ip link set dev eth0.40 up
+
+brctl addbr rojo
+brctl addif rojo eth0.10
+brctl addif rojo eth1 
+
+brctl addbr verde
+brctl addif verde eth0.20
+brctl addif verde eth2
+
+brctl addbr amarillo
+brctl addif amarillo eth0.30
+brctl addif amarillo eth3
+
+brctl addbr azul
+brctl addif azul eth0.40
+brctl addif azul eth4
+
+ip link set dev rojo up
+ip link set dev verde up
+ip link set dev amarillo up
+ip link set dev azul up
