@@ -1,6 +1,8 @@
-dhclient
 export https_proxy=http://192.168.0.254:3128
 export http_proxy=http://192.168.0.254:3128
+
+
+dhclient
 
 
 apt update && apt install cifs-utils -y
@@ -8,7 +10,7 @@ apt update && apt install cifs-utils -y
 
 touch /var/.credentials
 echo "username=pedropegu" > /var/.credentials
-echo "password=unodos" > /var/.credentials
+echo "password=unodos" >> /var/.credentials
 
 chmod 600 /var/.credentials
 
